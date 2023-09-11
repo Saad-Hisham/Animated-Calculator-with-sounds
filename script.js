@@ -95,6 +95,7 @@ const delButton = document.querySelector(".del")
 const prev = document.querySelector(".prev")
 
 equalButton.onclick = function () {
+    audio.currentTime=0
     audio.play()
     if ( eval(output.innerHTML.replace("x", "*"))==Infinity) {
         document.querySelector(".parent-container").classList.add("shake")
@@ -117,10 +118,13 @@ const resetButton = document.querySelector(".re")
 resetButton.onclick = function () {
     output.innerHTML = ""
     prev.innerHTML = ""
+    audio.currentTime=0
     audio.play()
 }
 delButton.onclick = function () {
-    output.innerHTML = output.innerHTML.slice(0, -1);
+    audio.currentTime = 0
     audio.play()
+
+    output.innerHTML = output.innerHTML.slice(0, -1);
 
 }
