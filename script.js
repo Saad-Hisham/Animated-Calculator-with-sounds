@@ -4,7 +4,7 @@ var Transition = new Audio("calculator-app-main/Transition.mp3");
 balls[3].style.transition = "left 0.5s ease";
 
 balls[0].onclick = function () {
-    Transition.currentTime=0
+    Transition.currentTime = 0
     Transition.play()
     balls[3].style.transition = "left 0.5s ease"; // Set the transition property
     balls[3].style.left = "0px";
@@ -12,7 +12,7 @@ balls[0].onclick = function () {
 };
 
 balls[1].onclick = function () {
-    Transition.currentTime=0
+    Transition.currentTime = 0
     Transition.play()
 
     balls[3].style.transition = "left 0.5s ease"; // Set the transition property
@@ -21,7 +21,7 @@ balls[1].onclick = function () {
 };
 
 balls[2].onclick = function () {
-    Transition.currentTime=0
+    Transition.currentTime = 0
     Transition.play()
     balls[3].style.transition = "left 0.5s ease"; // Set the transition property
     balls[3].style.left = "45px";
@@ -41,7 +41,7 @@ var error = new Audio("calculator-app-main/Err.mp3");
 for (let i = 0; i < buttons.length; i++) {
 
     buttons[i].onclick = function () {
-        audio.currentTime=0
+        audio.currentTime = 0
         audio.play();
         if (output.innerText.length == 0 && buttons[i].innerHTML == "+"
             || output.innerText.length == 0 && buttons[i].innerHTML == "x" ||
@@ -68,6 +68,8 @@ for (let i = 0; i < buttons.length; i++) {
             || output.innerText[output.innerText.length - 1] == "x" && buttons[i].innerHTML == "x"
             || output.innerText[output.innerText.length - 1] == "x" && buttons[i].innerHTML == "/"
             || output.innerText[output.innerText.length - 1] == "x" && buttons[i].innerHTML == "-"
+            || output.innerText[output.innerText.length - 1] == "." && buttons[i].innerHTML == "."
+
             || buttons[i].innerHTML == "="
             || buttons[i].innerHTML == "DEL"
             || buttons[i].innerHTML == "Reset"
@@ -94,11 +96,10 @@ const prev = document.querySelector(".prev")
 
 equalButton.onclick = function () {
     audio.play()
-    if (output.innerHTML.includes("/0")) {
+    if ( eval(output.innerHTML.replace("x", "*"))==Infinity) {
         document.querySelector(".parent-container").classList.add("shake")
-        error.currentTime=0
+        error.currentTime = 0
         error.play()
-
 
         setTimeout(() => {
             document.querySelector(".parent-container").classList.remove("shake")
@@ -106,7 +107,7 @@ equalButton.onclick = function () {
 
         }, 300);
     }
-    if (output.innerHTML.includes("/0") != true && output.innerHTML != '') {
+    if (output.innerHTML != '' && eval(output.innerHTML.replace("x", "*"))!=Infinity) {
         prev.innerHTML = output.innerHTML
         output.innerText = eval(output.innerHTML.replace("x", "*"))
         result = true
