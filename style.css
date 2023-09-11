@@ -11,7 +11,8 @@ body {
 }
 
 .parent-container {
-    min-width: 542px;
+     min-width: 542px;
+    max-width: 542px;
 }
 
 .themes-container {
@@ -99,6 +100,7 @@ p.p-1 {
     padding-right: 15px;
     padding-left: 15px;
     position: relative;
+    overflow-x: hidden;
 }
 
 .buttons {
