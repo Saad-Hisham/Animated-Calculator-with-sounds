@@ -97,28 +97,28 @@ const prev = document.querySelector(".prev")
 equalButton.onclick = function () {
     audio.currentTime = 0;
     audio.play();
-
+  
     if (
-        output.innerHTML.match(/0+[.]\d+/) !== null ||
-        output.innerHTML.endsWith("/0")
+      output.innerHTML.match(/0{2,}[.]/) !== null ||
+      output.innerHTML.endsWith("/0")
     ) {
-        // Prevent division by numbers like "00.2", "00.3", "00.5", "000.6", or "0000.7"
-        document.querySelector(".parent-container").classList.add("shake");
-        error.currentTime = 0;
-        error.play();
-
-        setTimeout(() => {
-            document.querySelector(".parent-container").classList.remove("shake");
-        }, 300);
+      // Prevent division by numbers with two or more leading zeros
+      document.querySelector(".parent-container").classList.add("shake");
+      error.currentTime = 0;
+      error.play();
+  
+      setTimeout(() => {
+        document.querySelector(".parent-container").classList.remove("shake");
+      }, 300);
     } else if (
-        output.innerHTML !== "" &&
-        eval(output.innerHTML.replace("x", "*")) !== Infinity &&
-        !isNaN(eval(output.innerHTML.replace("x", "*")))
+      output.innerHTML !== "" &&
+      eval(output.innerHTML.replace("x", "*")) !== Infinity &&
+      !isNaN(eval(output.innerHTML.replace("x", "*")))
     ) {
-        prev.innerHTML = output.innerHTML;
-        output.innerText = eval(output.innerHTML.replace("x", "*"));
+      prev.innerHTML = output.innerHTML;
+      output.innerText = eval(output.innerHTML.replace("x", "*"));
     }
-};
+  };
 
 const resetButton = document.querySelector(".re");
 resetButton.onclick = function () {
