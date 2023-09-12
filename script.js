@@ -33,7 +33,6 @@ balls[2].onclick = function () {
 const buttons = document.querySelectorAll(".button");
 const output = document.querySelector(".output");
 output.innerHTML = ""
-const result = false;
 var audio = new Audio("calculator-app-main/Tick.mp3");
 var error = new Audio("calculator-app-main/Err.mp3");
 
@@ -78,6 +77,7 @@ for (let i = 0; i < buttons.length; i++) {
             || output.innerText.length == 0 && buttons[i].innerText == "-"
             || output.innerText.length == 0 && buttons[i].innerText == "/"
 
+
         ) {
             output.innerHTML += ""
         }
@@ -95,36 +95,42 @@ const delButton = document.querySelector(".del")
 const prev = document.querySelector(".prev")
 
 equalButton.onclick = function () {
-    audio.currentTime=0
-    audio.play()
-    if ( eval(output.innerHTML.replace("x", "*"))==Infinity) {
-        document.querySelector(".parent-container").classList.add("shake")
-        error.currentTime = 0
-        error.play()
+    audio.currentTime = 0;
+    audio.play();
+
+    if (
+        output.innerHTML.match(/0+[.]\d+/) !== null ||
+        output.innerHTML.endsWith("/0")
+    ) {
+        // Prevent division by numbers like "00.2", "00.3", "00.5", "000.6", or "0000.7"
+        document.querySelector(".parent-container").classList.add("shake");
+        error.currentTime = 0;
+        error.play();
 
         setTimeout(() => {
-            document.querySelector(".parent-container").classList.remove("shake")
-
-
+            document.querySelector(".parent-container").classList.remove("shake");
         }, 300);
+    } else if (
+        output.innerHTML !== "" &&
+        eval(output.innerHTML.replace("x", "*")) !== Infinity &&
+        !isNaN(eval(output.innerHTML.replace("x", "*")))
+    ) {
+        prev.innerHTML = output.innerHTML;
+        output.innerText = eval(output.innerHTML.replace("x", "*"));
     }
-    if (output.innerHTML != '' && eval(output.innerHTML.replace("x", "*"))!=Infinity) {
-        prev.innerHTML = output.innerHTML
-        output.innerText = eval(output.innerHTML.replace("x", "*"))
-        result = true
-    }
-}
-const resetButton = document.querySelector(".re")
+};
+
+const resetButton = document.querySelector(".re");
 resetButton.onclick = function () {
-    output.innerHTML = ""
-    prev.innerHTML = ""
-    audio.currentTime=0
-    audio.play()
-}
+    output.innerHTML = "";
+    prev.innerHTML = "";
+    audio.currentTime = 0;
+    audio.play();
+};
+
 delButton.onclick = function () {
-    audio.currentTime = 0
-    audio.play()
+    audio.currentTime = 0;
+    audio.play();
 
     output.innerHTML = output.innerHTML.slice(0, -1);
-
-}
+};
