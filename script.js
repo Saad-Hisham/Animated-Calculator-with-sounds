@@ -73,7 +73,7 @@ for (let i = 0; i < buttons.length; i++) {
             || buttons[i].innerHTML == "DEL"
             || buttons[i].innerHTML == "Reset"
             || output.innerText.length == 0 && buttons[i].innerText == "+"
-            || output.innerText.length == 0 && buttons[i].innerText == "x
+            || output.innerText.length == 0 && buttons[i].innerText == "x"
             || output.innerText.length == 0 && buttons[i].innerText == "/"
 
 
