@@ -51,7 +51,6 @@ for (let i = 0; i < buttons.length; i++) {
         if (output.innerText[output.innerText.length - 1] == "+" && buttons[i].innerHTML == "+"
             || output.innerText[output.innerText.length - 1] == "+" && buttons[i].innerHTML == "x"
             || output.innerText[output.innerText.length - 1] == "+" && buttons[i].innerHTML == "/"
-            || output.innerText[output.innerText.length - 1] == "+" && buttons[i].innerHTML == "-"
 
             || output.innerText[output.innerText.length - 1] == "-" && buttons[i].innerHTML == "+"
             || output.innerText[output.innerText.length - 1] == "-" && buttons[i].innerHTML == "x"
